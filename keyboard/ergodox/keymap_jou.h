@@ -53,10 +53,10 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  TRNS,TRNS,TRNS,
         // right hand
              FN4, TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-                  TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-                       TRNS,TRNS,TRNS,TRNS,TRNS,
+             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,VOLU,
+                  TRNS,TRNS,TRNS,TRNS,TRNS,VOLD,
+             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,MUTE,
+                       TRNS,TRNS,MPRV,MPLY,MNXT,
         TRNS,TRNS,
         TRNS,
         TRNS,TRNS,TRNS
@@ -96,7 +96,7 @@ enum function_id {
 static const uint16_t PROGMEM fn_actions[] = {
     ACTION_FUNCTION(TEENSY_KEY),                    // FN0 - Teensy key
     ACTION_LAYER_MOMENTARY(1),                      // FN1 - switch to Layer1
-    ACTION_LAYER_SET(2, ON_PRESS),                  // FN2 - set Layer2
+    ACTION_LAYER_MOMENTARY(2),                      // FN2 - set Layer2
     ACTION_LAYER_TOGGLE(3),                         // FN3 - toggle Layer3 aka Numpad layer
     ACTION_LAYER_SET(0, ON_PRESS),                  // FN4 - set Layer0
 };
