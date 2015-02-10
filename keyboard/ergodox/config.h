@@ -24,14 +24,31 @@ Project located at <https://github.com/benblazak/ergodox-firmware>
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#ifdef KEYMAP_JOU
+
+/* Vanity USB ID for me */
+
+/* Use V-USB standard HID vendor/product ID for identification instead of making one up */
+#define VENDOR_ID       0x16c0
+#define PRODUCT_ID      0x05df
+#define DEVICE_VER      0x0001
+
+#define MANUFACTURER    TMK/Cub/jou
+#define PRODUCT         Ergodox
+#define DESCRIPTION     t.m.k. keyboard firmware for Ergodox
+
+#else
 
 /* USB Device descriptor parameter */
+
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0x1307
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    TMK/Cub
 #define PRODUCT         Ergodox
 #define DESCRIPTION     t.m.k. keyboard firmware for Ergodox
+
+#endif
 
 #define MATRIX_ROWS 14
 #define MATRIX_COLS 6
