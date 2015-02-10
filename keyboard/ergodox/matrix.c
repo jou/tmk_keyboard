@@ -171,7 +171,8 @@ uint8_t matrix_scan(void)
 
     ergodox_board_led_off();
     ergodox_right_led_1_off();
-    ergodox_right_led_2_off();
+    // we need that for caps lock indication
+    // ergodox_right_led_2_off();
     ergodox_right_led_3_off();
 
     switch (layer) {

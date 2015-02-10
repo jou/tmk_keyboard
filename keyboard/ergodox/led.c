@@ -25,6 +25,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 void led_set(uint8_t usb_led)
 {
+
+#ifdef KEYMAP_JOU
+    
+    // yellow - CapsLock
+    if (usb_led & (1<<USB_LED_CAPS_LOCK)) {
+        ergodox_right_led_2_on();
+    } else {
+        ergodox_right_led_2_off();
+    }
+
+#else
     // topmost - NumLock
 #ifndef INVERT_NUMLOCK
     if (usb_led & (1<<USB_LED_NUM_LOCK)) {
@@ -53,5 +64,6 @@ void led_set(uint8_t usb_led)
     } else {
         ergodox_right_led_3_off();
     }
+#endif
 }
 
