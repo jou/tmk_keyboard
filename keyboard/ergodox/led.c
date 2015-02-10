@@ -30,9 +30,9 @@ void led_set(uint8_t usb_led)
     
     // yellow - CapsLock
     if (usb_led & (1<<USB_LED_CAPS_LOCK)) {
-        ergodox_right_led_2_on();
+        jou_led_yellow_on();
     } else {
-        ergodox_right_led_2_off();
+        jou_led_yellow_off();
     }
 
 #else

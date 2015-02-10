@@ -114,3 +114,43 @@ inline void ergodox_led_all_set(uint8_t n)
     ergodox_right_led_3_set(n);
 }
 
+#ifdef KEYMAP_JOU 
+
+#define JOU_LED_BRIGHTNESS_GREEN  144
+#define JOU_LED_BRIGHTNESS_YELLOW 28
+#define JOU_LED_BRIGHTNESS_RED    8
+
+inline void jou_led_green_on(void)
+{
+    ergodox_right_led_3_set(JOU_LED_BRIGHTNESS_GREEN);
+    ergodox_right_led_3_on();
+}
+
+inline void jou_led_green_off(void)
+{
+    ergodox_right_led_3_off();
+}
+
+inline void jou_led_yellow_on(void)
+{
+    ergodox_right_led_2_set(JOU_LED_BRIGHTNESS_YELLOW);
+    ergodox_right_led_2_on();
+}
+
+inline void jou_led_yellow_off(void)
+{
+    ergodox_right_led_2_off();
+}
+
+inline void jou_led_red_on(void)
+{
+    ergodox_right_led_1_set(JOU_LED_BRIGHTNESS_RED);
+    ergodox_right_led_1_on();
+}
+
+inline void jou_led_red_off(void)
+{
+    ergodox_right_led_1_off();
+}
+
+#endif

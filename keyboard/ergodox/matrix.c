@@ -169,15 +169,15 @@ uint8_t matrix_scan(void)
 #ifdef KEYMAP_JOU
     uint8_t layer = biton32(layer_state);
 
-    ergodox_board_led_off();
-    ergodox_right_led_1_off();
-    // we need that for caps lock indication
-    // ergodox_right_led_2_off();
-    ergodox_right_led_3_off();
+    jou_led_green_off();
+    jou_led_red_off();
 
     switch (layer) {
+        case 2:
+            jou_led_red_on();
+            break;
         case 3: 
-            ergodox_right_led_3_on();
+            jou_led_green_on();
             break;
         default:
             // none
