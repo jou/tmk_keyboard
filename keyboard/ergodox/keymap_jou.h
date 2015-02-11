@@ -31,10 +31,10 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                            PGUP,
                                  DEL, TRNS,PGDN,
         // right hand
-             F12, F6,  F7,  F8,  F9,  F10, TRNS,
-             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-                  LEFT,DOWN,  UP,RGHT,TRNS,TRNS,
-             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+              F12, F6,  F7,  F8,  F9,  F10,TRNS,
+             TRNS,TRNS,TRNS, FN5, FN6, FN7,TRNS,
+                  LEFT,DOWN,  UP,RGHT,LBRC,RBRC,
+             TRNS,TRNS,TRNS,TRNS, FN8,TRNS,TRNS,
                        TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,
         TRNS,
@@ -90,6 +90,11 @@ enum function_id {
     TEENSY_KEY,
 };
 
+enum macro_id {
+    AUML, OUML, UUML,
+    ARROW_RIGHT,
+};
+
 /*
  * Fn action definition
  */
@@ -99,6 +104,10 @@ static const uint16_t PROGMEM fn_actions[] = {
    [2] = ACTION_LAYER_MOMENTARY(2),
    [3] = ACTION_LAYER_TOGGLE(3),
    [4] = ACTION_LAYER_SET(0, ON_PRESS),
+   [5] = ACTION_MACRO(AUML),
+   [6] = ACTION_MACRO(OUML),
+   [7] = ACTION_MACRO(UUML),
+   [8] = ACTION_MACRO(ARROW_RIGHT),
 };
 
 void action_function(keyrecord_t *event, uint8_t id, uint8_t opt)
@@ -110,4 +119,30 @@ void action_function(keyrecord_t *event, uint8_t id, uint8_t opt)
         bootloader_jump(); // should not return
         print("not supported.\n");
     }
+}
+
+const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
+{
+    keyevent_t event = record->event;
+
+    switch (id) {
+        case AUML:
+            return (event.pressed ?
+                    MACRO( D(LALT), T(U), U(LALT), T(A), END ) :
+                    MACRO_NONE);
+        case OUML:
+            return (event.pressed ?
+                    MACRO( D(LALT), T(U), U(LALT), T(O), END ) :
+                    MACRO_NONE);
+        case UUML:
+            return (event.pressed ?
+                    MACRO( D(LALT), T(U), U(LALT), T(U), END ) :
+                    MACRO_NONE);
+
+        case ARROW_RIGHT:
+            return (event.pressed ?
+                    MACRO( T(MINS), D(LSFT), T(DOT), U(LSFT), END ) :
+                    MACRO_NONE);
+    }
+    return MACRO_NONE;
 }
