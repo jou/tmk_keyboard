@@ -92,7 +92,7 @@ enum function_id {
 
 enum macro_id {
     AUML, OUML, UUML,
-    ARROW_RIGHT,
+    ASCII_ARROW_RIGHT,
 };
 
 /*
