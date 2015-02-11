@@ -107,7 +107,7 @@ static const uint16_t PROGMEM fn_actions[] = {
    [5] = ACTION_MACRO(AUML),
    [6] = ACTION_MACRO(OUML),
    [7] = ACTION_MACRO(UUML),
-   [8] = ACTION_MACRO(ARROW_RIGHT),
+   [8] = ACTION_MACRO(ASCII_ARROW_RIGHT),
 };
 
 void action_function(keyrecord_t *event, uint8_t id, uint8_t opt)
@@ -139,7 +139,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
                     MACRO( D(LALT), T(U), U(LALT), T(U), END ) :
                     MACRO_NONE);
 
-        case ARROW_RIGHT:
+        case ASCII_ARROW_RIGHT:
             return (event.pressed ?
                     MACRO( T(MINS), D(LSFT), T(DOT), U(LSFT), END ) :
                     MACRO_NONE);
