@@ -171,10 +171,14 @@ uint8_t matrix_scan(void)
 
     jou_led_green_off();
     jou_led_red_off();
+    jou_led_blue_off();
 
     switch (layer) {
         case 1:
             jou_led_red_on();
+            break;
+        case 2: 
+            jou_led_blue_on();
             break;
         case 3: 
             jou_led_green_on();

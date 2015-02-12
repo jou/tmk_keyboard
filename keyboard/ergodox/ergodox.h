@@ -79,12 +79,22 @@ inline void ergodox_left_led_1_off(void)    { ergodox_left_led_1 = 0; }
 inline void ergodox_left_led_2_off(void)    { ergodox_left_led_2 = 0; }
 inline void ergodox_left_led_3_off(void)    { ergodox_left_led_3 = 0; }
 
+#ifdef KEYMAP_JOU
+inline void jou_led_blue_on(void)      { DDRD |=  (1<<5); PORTD |=  (1<<5); }
+inline void jou_led_blue_off(void)     { DDRD &= ~(1<<5); PORTD &= ~(1<<5); }
+#endif
+
 inline void ergodox_led_all_on(void)
 {
     ergodox_board_led_on();
     ergodox_right_led_1_on();
     ergodox_right_led_2_on();
     ergodox_right_led_3_on();
+
+#ifdef KEYMAP_JOU 
+    jou_led_blue_on();
+#endif
+
     ergodox_left_led_1_on();
     ergodox_left_led_2_on();
     ergodox_left_led_3_on();
@@ -97,6 +107,11 @@ inline void ergodox_led_all_off(void)
     ergodox_right_led_1_off();
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
+
+#ifdef KEYMAP_JOU 
+    jou_led_blue_off();
+#endif
+
     ergodox_left_led_1_off();
     ergodox_left_led_2_off();
     ergodox_left_led_3_off();

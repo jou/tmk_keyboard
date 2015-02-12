@@ -63,6 +63,11 @@ void init_ergodox(void)
     PORTC |=  (1<<7);
     PORTD |=  (1<<7 | 1<<5 | 1<<4);
     PORTE |=  (1<<6);
+
+#ifdef KEYMAP_JOU
+    DDRD  &= ~(1<<5); 
+    PORTD &= ~(1<<5);
+#endif
 }
 
 void ergodox_blink_all_leds(void)
