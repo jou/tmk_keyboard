@@ -2,9 +2,9 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KEYMAP(  // layer 0 : default
         // left hand
         ESC, 1,   2,   3,   4,   5,   MINS,
-        GRV, Q,   W,   E,   R,   T,   FN2,
+        TAB, Q,   W,   E,   R,   T,   FN2,
         LCTL,A,   S,   D,   F,   G,
-        TAB, Z,   X,   C,   V,   B,   LSFT,
+        GRV, Z,   X,   C,   V,   B,   LSFT,
         BSLS,LSFT,LCTL,LALT,LGUI,
                                       LEFT,RGHT,
                                              UP,
@@ -23,9 +23,9 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KEYMAP(  // layer 1 : function and symbol keys
         // left hand
         TRNS,F1,  F2,  F3,  F4,  F5,  F11,
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,FN4,
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,FN9, FN10,TRNS,TRNS,TRNS,FN4,
+        TRNS,LBRC,RBRC,FN11,FN12,TRNS,
+        TRNS,FN13,FN14,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,
                                       HOME, END,
                                            PGUP,
@@ -91,7 +91,10 @@ enum function_id {
 };
 
 enum macro_id {
+    NOOP,
+    // Umlauts
     AUML, OUML, UUML,
+    // Stuff
     ASCII_ARROW_RIGHT,
 };
 
@@ -99,15 +102,21 @@ enum macro_id {
  * Fn action definition
  */
 static const uint16_t PROGMEM fn_actions[] = {
-   [0] = ACTION_FUNCTION(TEENSY_KEY),
-   [1] = ACTION_LAYER_TAP_TOGGLE(1),
-   [2] = ACTION_LAYER_MOMENTARY(2),
-   [3] = ACTION_LAYER_TOGGLE(3),
-   [4] = ACTION_LAYER_SET(0, ON_PRESS),
-   [5] = ACTION_MACRO(AUML),
-   [6] = ACTION_MACRO(OUML),
-   [7] = ACTION_MACRO(UUML),
-   [8] = ACTION_MACRO(ASCII_ARROW_RIGHT),
+   [0] =  ACTION_FUNCTION(TEENSY_KEY),
+   [1] =  ACTION_LAYER_TAP_TOGGLE(1),
+   [2] =  ACTION_LAYER_MOMENTARY(2),
+   [3] =  ACTION_LAYER_TOGGLE(3),
+   [4] =  ACTION_LAYER_SET(0, ON_PRESS),
+   [5] =  ACTION_MACRO(AUML),
+   [6] =  ACTION_MACRO(OUML),
+   [7] =  ACTION_MACRO(UUML),
+   [8] =  ACTION_MACRO(ASCII_ARROW_RIGHT),
+   [9] =  ACTION_MODS_KEY(MOD_LSFT, KC_9),
+   [10] = ACTION_MODS_KEY(MOD_LSFT, KC_0),
+   [11] = ACTION_MODS_KEY(MOD_LSFT, KC_LBRC),
+   [12] = ACTION_MODS_KEY(MOD_LSFT, KC_RBRC),
+   [13] = ACTION_MODS_KEY(MOD_LSFT, KC_COMM),
+   [14] = ACTION_MODS_KEY(MOD_LSFT, KC_DOT),
 };
 
 void action_function(keyrecord_t *event, uint8_t id, uint8_t opt)
