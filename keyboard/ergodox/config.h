@@ -37,6 +37,9 @@ Project located at <https://github.com/benblazak/ergodox-firmware>
 #define PRODUCT         Ergodox
 #define DESCRIPTION     t.m.k. keyboard firmware for Ergodox
 
+/* Tapping toggle with 3 taps instead of the default 5  */
+#define TAPPING_TOGGLE  3
+
 #else
 
 /* USB Device descriptor parameter */
