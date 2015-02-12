@@ -134,6 +134,10 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
     keyevent_t event = record->event;
 
+    /* TODO: check if shift is pressed and emit capital umlauts/double arrow
+     *       active modifiers can be read with get_mods() and the mask for
+     *       the shift keys is 0b00100010
+    */
     switch (id) {
         case AUML:
             return (event.pressed ?
