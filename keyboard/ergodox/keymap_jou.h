@@ -53,9 +53,9 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  TRNS,TRNS,TRNS,
         // right hand
              FN4, TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-             TRNS,CALC,TRNS,TRNS,TRNS,TRNS,VOLU,
-                  TRNS,TRNS,TRNS,TRNS,TRNS,VOLD,
-             TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,MUTE,
+             TRNS,CALC,BTN1,BTN3,BTN2,  NO,VOLU,
+                  MS_L,MS_D,MS_U,MS_R,WH_U,VOLD,
+             TRNS,TRNS,TRNS,WH_L,WH_R,WH_D,MUTE,
                        TRNS,TRNS,MPRV,MPLY,MNXT,
         TRNS,TRNS,
         TRNS,
@@ -104,7 +104,7 @@ enum macro_id {
 static const uint16_t PROGMEM fn_actions[] = {
    [0] =  ACTION_FUNCTION(TEENSY_KEY),
    [1] =  ACTION_LAYER_TAP_TOGGLE(1),
-   [2] =  ACTION_LAYER_MOMENTARY(2),
+   [2] =  ACTION_LAYER_TAP_TOGGLE(2),
    [3] =  ACTION_LAYER_TOGGLE(3),
    [4] =  ACTION_LAYER_SET(0, ON_PRESS),
    [5] =  ACTION_MACRO(AUML),
