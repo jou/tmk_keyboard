@@ -41,9 +41,9 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TRNS,TRNS,TRNS
     ),
 
-    KEYMAP(  // layer 2 : keyboard functions
+    KEYMAP(  // layer 2 : keyboard function & mouse keys
         // left hand
-        FN0, TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
@@ -65,7 +65,7 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KEYMAP(  // layer 3: numpad
         // left hand
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
+        FN0, TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
         TRNS,TRNS,TRNS,TRNS,TRNS,
