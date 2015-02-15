@@ -4,20 +4,20 @@ static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ESC, 1,   2,   3,   4,   5,   MINS,
         TAB, Q,   W,   E,   R,   T,   FN2,
         LCTL,A,   S,   D,   F,   G,
-        GRV, Z,   X,   C,   V,   B,   LSFT,
+        GRV, Z,   X,   C,   V,   B,   FN1,
         BSLS,LSFT,LCTL,LALT,LGUI,
                                       LEFT,RGHT,
                                              UP,
-                                 BSPC, FN1,DOWN,
+                                 BSPC,LSFT,DOWN,
         // right hand
              EQL, 6,   7,   8,   9,   0,   LBRC,
              ENT, Y,   U,   I,   O,   P,   RBRC,
                   H,   J,   K,   L,   SCLN,QUOT,
-             RSFT,N,   M,   COMM,DOT, SLSH,MINS,
+             FN1, N,   M,   COMM,DOT, SLSH,MINS,
                        RGUI,RALT,RCTL,RSFT, EQL,
         FN3,CAPS,
         NO,
-        NO,  FN1,SPC
+        NO, RSFT,SPC
     ),
 
     KEYMAP(  // layer 1 : function and symbol keys
