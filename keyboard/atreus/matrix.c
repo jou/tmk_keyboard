@@ -137,13 +137,32 @@ uint8_t matrix_key_count(void)
 /* Column pin configuration
  * col: 0   1   2   3   4   5   6   7   8   9   10
  * pin: B7  D6  F7  F6  B6  D4  E6  B4  B5  C6  D7
+ * pin: E6  C6  D4  D0  D3  B3  F4  F5  F6  F7  B1 (jou)
  */
 static void  init_cols(void)
 {
+#ifdef BUILD_JOU
+    // Input with pull-up(DDR:0, PORT:1)
+    DDRE  &= ~(0b01000000);
+    PORTE |=  (0b01000000);
+
+    DDRC  &= ~(0b01000000);
+    PORTC |=  (0b01000000);
+
+    DDRD  &= ~(0b00011001);
+    PORTD |=  (0b00011001);
+
+    DDRB  &= ~(0b00001010);
+    PORTB |=  (0b00001010);
+
+    DDRF  &= ~(0b11110000);
+    PORTF |=  (0b11110000);
+#else
     DDRB = DDRC = DDRE = DDRF = 0; // columns
     PORTB = PORTC = PORTE = PORTF = 255; // pullup resistors on inputs
     DDRD = 15; // rows (1 2 4 8) high and columns (16 32 64 128) low
     PORTD = 15;
+#endif
 }
 
 static matrix_row_t read_cols(void)
@@ -160,6 +179,18 @@ static matrix_row_t read_cols(void)
            (PINB&(1<<2) ? 0 : (1<<8)) |
            (PINB&(1<<1) ? 0 : (1<<9)) |
            (PINB&(1<<0) ? 0 : (1<<10)) ;
+#elif defined(BUILD_JOU)
+    return (PINE&(1<<6) ? 0 : (1<<0)) |
+           (PINC&(1<<6) ? 0 : (1<<1)) |
+           (PIND&(1<<4) ? 0 : (1<<2)) |
+           (PIND&(1<<0) ? 0 : (1<<3)) |
+           (PIND&(1<<3) ? 0 : (1<<4)) |
+           (PINB&(1<<3) ? 0 : (1<<5)) |
+           (PINF&(1<<4) ? 0 : (1<<6)) |
+           (PINF&(1<<5) ? 0 : (1<<7)) |
+           (PINF&(1<<6) ? 0 : (1<<8)) |
+           (PINF&(1<<7) ? 0 : (1<<9)) |
+           (PINB&(1<<1) ? 0 : (1<<10)) ;
 #else
     return (PINB&(1<<7) ? 0 : (1<<0)) |
            (PIND&(1<<6) ? 0 : (1<<1)) |
@@ -179,10 +210,20 @@ static matrix_row_t read_cols(void)
  * row: 0   1   2   3
  * pin: D0  D1  D3  D2    (a-star micro)
  * pin: D0  D1  D2  D3    (teensy2)
+ * pin: B4  D5  B0  B2    (jou)
  */
 static void unselect_rows(void)
 {
+#ifdef BUILD_JOU
+    // Hi-Z(DDR:0, PORT:0) to unselect
+    DDRB  &= ~(0b00010101);
+    PORTB &= ~(0b00010101);
+
+    DDRD  &= ~(0b00100000);
+    PORTD &= ~(0b00100000);
+#else
     PORTD = 15;
+#endif
 }
 
 #define ROW_COUNT 4
@@ -194,5 +235,27 @@ int rows[ROW_COUNT] = {0, 1, 3, 2};
 
 static void select_row(uint8_t row)
 {
+#ifdef BUILD_JOU
+    // Output low(DDR:1, PORT:0) to select
+    switch (row) {
+        case 0:
+            DDRB  |=  (1<<4);
+            PORTB &= ~(1<<4);
+            break;
+        case 1:
+            DDRD  |=  (1<<5);
+            PORTD &= ~(1<<5);
+            break;
+        case 2:
+            DDRB  |=  (1<<0);
+            PORTB &= ~(1<<0);
+            break;
+        case 3:
+            DDRB  |=  (1<<2);
+            PORTB &= ~(1<<2);
+            break;
+    }
+#else
   PORTD = (char)(~(1 << rows[row]));
+#endif
 }

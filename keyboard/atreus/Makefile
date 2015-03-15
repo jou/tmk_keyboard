@@ -122,6 +122,13 @@ COMMAND_ENABLE = yes    # Commands for debug and configuration
 # SLEEP_LED_ENABLE = yes  # Breathing sleep LED during USB suspend
 NKRO_ENABLE = yes	# USB Nkey Rollover - not yet supported in LUFA
 
+##### jou: Enable PS/2 TrackPoint
+PS2_MOUSE_ENABLE = yes  # PS/2 mouse(TrackPoint) support
+#PS2_USE_BUSYWAIT = yes # uses primitive reference code
+PS2_USE_INT = yes      # uses external interrupt for falling edge of PS/2 clock pin
+#PS2_USE_USART = yes     # uses hardware USART engine for PS/2 signal receive(recomened)
+##### jou: Enable PS/2 TrackPoint END
+
 # Causes trouble on low voltage chipsets.
 OPT_DEFS += -DNO_SUSPEND_POWER_DOWN
 
@@ -137,6 +144,8 @@ ifdef TEENSY
 	OPT_DEFS += -DTEENSY -DBOOTLOADER_SIZE=512
 endif
 
+OPT_DEFS += -DBUILD_JOU
+
 build: $(TARGET).hex
 
 upload: build
@@ -144,5 +153,8 @@ upload: build
 	avrdude -p $(MCU) -c avr109 -U flash:w:$(TARGET).hex -P $(USB)
 
 include $(TOP_DIR)/protocol/lufa.mk
+##### jou: Enable PS/2 TrackPoint
+include $(TOP_DIR)/protocol.mk
+##### jou: Enable PS/2 TrackPoint END
 include $(TOP_DIR)/common.mk
 include $(TOP_DIR)/rules.mk
