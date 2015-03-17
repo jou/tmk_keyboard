@@ -27,6 +27,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "util.h"
 #include "matrix.h"
 
+#ifdef BUILD_JOU
+#include "atreus_led.h"
+#include "action_layer.h"
+#endif
 
 #ifndef DEBOUNCE
 #   define DEBOUNCE	5
@@ -61,6 +65,11 @@ void matrix_init(void)
     unselect_rows();
     init_cols();
 
+#ifdef BUILD_JOU
+    init_leds();
+    cycle_leds();
+#endif
+
     // initialize matrix state: all keys off
     for (uint8_t i=0; i < MATRIX_ROWS; i++) {
         matrix[i] = 0;
@@ -70,6 +79,29 @@ void matrix_init(void)
 
 uint8_t matrix_scan(void)
 {
+#ifdef BUILD_JOU
+    uint8_t layer = biton32(layer_state);
+
+    led_1_off();
+    led_2_off();
+    led_3_off();
+
+    switch (layer) {
+        case 1:
+            led_1_on();
+            break;
+        case 2: 
+            led_2_on();
+            break;
+        case 3: 
+            led_3_on();
+            break;
+        default:
+            // none
+            break;
+    }
+#endif
+
     for (uint8_t i = 0; i < MATRIX_ROWS; i++) {
         select_row(i);
         _delay_us(50);  // without this wait read unstable value.

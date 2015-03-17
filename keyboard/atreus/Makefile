@@ -55,8 +55,8 @@ SRC =	keymap_common.c \
 	matrix.c \
 	led.c
 
-KEYMAP ?= qwerty
-SRC := keymap_$(KEYMAP).c $(SRC)
+KEYMAP ?= jou
+SRC := atreus_led.c keymap_$(KEYMAP).c $(SRC)
 
 CONFIG_H = config.h
 
@@ -122,12 +122,19 @@ COMMAND_ENABLE = yes    # Commands for debug and configuration
 # SLEEP_LED_ENABLE = yes  # Breathing sleep LED during USB suspend
 NKRO_ENABLE = yes	# USB Nkey Rollover - not yet supported in LUFA
 
-##### jou: Enable PS/2 TrackPoint
+##### jou
+
+# Mouse/extra keys
+MOUSEKEY_ENABLE = yes	# Mouse keys(+4700)
+EXTRAKEY_ENABLE = yes	# Audio control and System control(+450)
+
+# Enable PS/2 TrackPoint
 PS2_MOUSE_ENABLE = yes  # PS/2 mouse(TrackPoint) support
 #PS2_USE_BUSYWAIT = yes # uses primitive reference code
 PS2_USE_INT = yes      # uses external interrupt for falling edge of PS/2 clock pin
 #PS2_USE_USART = yes     # uses hardware USART engine for PS/2 signal receive(recomened)
-##### jou: Enable PS/2 TrackPoint END
+
+##### jou //END
 
 # Causes trouble on low voltage chipsets.
 OPT_DEFS += -DNO_SUSPEND_POWER_DOWN

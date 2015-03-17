@@ -19,8 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "stdint.h"
 #include "led.h"
 
-// LED: B5 D7 B6
-
 void led_set(uint8_t usb_led)
 {
 
