@@ -20,17 +20,20 @@ void init_leds() {
     // Setup PWM for LED pins
     // B5: OC1A, D7: OC4D, B6: OC1B
 
-    // // Setup fast PWM for OC1
-    // TCCR1A = 0b10101001;
-    // TCCR1B = 0b00001001;
+    // Setup fast PWM for OC1A & OC1B
+    TCCR1A = 0b10101001;
+    TCCR1B = 0b00001001;
 
-    // // Setup fast PWM for OC4
-    // // TODO
+    // Setup fast PWM for OC4D
+    TCCR4A = 0b00000000;
+    TCCR4B = 0b00000001;
+    TCCR4C = 0b00001001;
+    TCCR4D = 0b00000000;
 
-    // // Set brightness of LEDs
-    // led_1_set_brightness(INDICATOR_LED_BRIGHTNESS);
-    // led_2_set_brightness(INDICATOR_LED_BRIGHTNESS);
-    // led_3_set_brightness(INDICATOR_LED_BRIGHTNESS);
+    // Set brightness of LEDs
+    led_1_set_brightness(INDICATOR_LED_BRIGHTNESS);
+    led_2_set_brightness(INDICATOR_LED_BRIGHTNESS);
+    led_3_set_brightness(INDICATOR_LED_BRIGHTNESS);
 
     // Initialize with off state
     led_1_off();
