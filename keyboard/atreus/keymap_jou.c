@@ -3,9 +3,9 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* 0: mostly letters */
-  KEYMAP(KC_Q, KC_W, KC_E,  KC_R,   KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, \
-         KC_A, KC_S, KC_FN9,KC_FN4, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, \
-         KC_Z, KC_X, KC_C,  KC_V,   KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, \
+  KEYMAP(KC_Q, KC_W, KC_E,   KC_R,   KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, \
+         KC_A, KC_S, KC_FN10,KC_FN4, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, \
+         KC_Z, KC_X, KC_C,   KC_V,   KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, \
          KC_ESC, KC_TAB, KC_LGUI,  KC_LSFT, KC_BSPC, KC_LCTL, KC_LALT,     \
          KC_SPC, KC_FN0, KC_MINS,  KC_QUOT, KC_ENT),                     \
 
@@ -21,14 +21,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
   /* 2: arrows and function keys */
   KEYMAP(KC_NO,  KC_NO,   KC_NO,   KC_NO,   KC_PGUP,                   KC_UP,  KC_F7, KC_F8, KC_F9, KC_F10, \
-         KC_LCTL,KC_LALT, KC_FN10, KC_LGUI, KC_NO,                     KC_DOWN,KC_F4, KC_F5, KC_F6, KC_F11, \
+         KC_LCTL,KC_LALT, KC_FN11, KC_LGUI, KC_NO,                     KC_DOWN,KC_F4, KC_F5, KC_F6, KC_F11, \
          KC_NO,  KC_NO,   KC_NO,   KC_NO,   KC_NO,                     KC_NO,  KC_F1, KC_F2, KC_F3, KC_F12, \
          KC_NO,  KC_NO,   KC_LGUI, KC_LSFT, KC_DEL,  KC_LCTL, KC_LALT, KC_SPC, KC_FN2, KC_NO, KC_NO, KC_FN3), \
 
   /* 3: arrows and more stuff */
   KEYMAP(KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  ,                   KC_NO  , KC_FN6 , KC_FN7 , KC_FN8 , KC_VOLU, \
          KC_LCTL, KC_LALT, KC_LGUI, KC_FN4 , KC_NO  ,                   KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, KC_VOLD, \
-         KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  ,                   KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_MUTE, \
+         KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  ,                   KC_NO  , KC_NO  , KC_NO  , KC_FN9 , KC_MUTE, \
          KC_NO  , KC_NO  , KC_NO  , KC_LSFT, KC_BSPC, KC_LCTL, KC_LALT, KC_NO  , KC_NO  , KC_MPRV, KC_MPLY, KC_MNXT) , \
 };
 
@@ -50,8 +50,9 @@ const uint16_t PROGMEM fn_actions[] = {
   [6] = ACTION_MACRO(AUML),
   [7] = ACTION_MACRO(OUML),
   [8] = ACTION_MACRO(UUML),
-  [9] = ACTION_LAYER_TAP_KEY(2, KC_D),
-  [10] = ACTION_LAYER_OFF(2, ON_RELEASE),
+  [9] = ACTION_MACRO(ASCII_ARROW_RIGHT),
+  [10] = ACTION_LAYER_TAP_KEY(2, KC_D),
+  [11] = ACTION_LAYER_OFF(2, ON_RELEASE),
 };
 
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
