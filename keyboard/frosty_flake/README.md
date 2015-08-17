@@ -16,6 +16,8 @@ By default, it builds the firmware for hardware revision 20140521. To build for 
 
     $ make -f Makefile.lufa HW_REVISION=20130602
 
+Firmware for 20130602 is not tested!
+
 Bootloader
 ---------
 To enter bootloader by hardware use a magnet above the controller before connecting the usb cable.

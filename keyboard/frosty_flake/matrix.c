@@ -126,20 +126,30 @@ uint8_t matrix_key_count(void)
  * -----------------
  * row: 0    1    2    3    4    5    6    7
  * pin: PC7  PB5  PB4  PB6  PB1  PB0  PB3  PB2
+ *
+ * Revision 20130602
+ * -----------------
+ * row: 0    1    2    3    4    5    6    7
+ * pin: PC2  PD0  PD1  PC7  PD5  PD6  PD2  PD4
  */
 static void init_rows(void)
 {
-#if HW_REVISION = 20140521
+#if HW_REVISION == 20140521
     DDRC &= ~0b10000000;
     DDRB &= ~0b01111111;
     PORTC |= 0b10000000;
     PORTB |= 0b01111111;
+#elif HW_REVISION == 20130602
+    DDRC &= ~0b10000100;
+    DDRD &= ~0b01110111;
+    PORTC |= 0b10000100;
+    PORTD |= 0b01110111;
 #endif
 }
 
 static uint8_t read_rows(void)
 {
-#if HW_REVISION = 20140521
+#if HW_REVISION == 20140521
     return (PINC&(1<<7) ? 0 : (1<<0)) |
            (PINB&(1<<5) ? 0 : (1<<1)) |
            (PINB&(1<<4) ? 0 : (1<<2)) |
@@ -148,6 +158,15 @@ static uint8_t read_rows(void)
            (PINB&(1<<0) ? 0 : (1<<5)) |
            (PINB&(1<<3) ? 0 : (1<<6)) |
            (PINB&(1<<2) ? 0 : (1<<7));
+#elif HW_REVISION == 20130602
+    return (PINC&(1<<2) ? 0 : (1<<0)) |
+           (PIND&(1<<0) ? 0 : (1<<1)) |
+           (PIND&(1<<1) ? 0 : (1<<2)) |
+           (PINC&(1<<7) ? 0 : (1<<3)) |
+           (PIND&(1<<5) ? 0 : (1<<4)) |
+           (PIND&(1<<6) ? 0 : (1<<5)) |
+           (PIND&(1<<2) ? 0 : (1<<6)) |
+           (PIND&(1<<4) ? 0 : (1<<7));
 #endif
 }
 
@@ -155,7 +174,6 @@ static uint8_t read_rows(void)
  *
  *  Revision 20140521
  *  -----------------
- *
  *   COL PD0 PD1 PD2 PD3 PD4 PD5 PD6 PD7
  *    0   1   1   0   0   0   1   0   0 
  *    1   0   0   0   1   1   1   1   0 
@@ -175,18 +193,43 @@ static uint8_t read_rows(void)
  *   15   1   1   0   1   1   0   0   0 
  *   16   1   1   0   1   0   1   0   0 
  *   17   1   1   0   0   1   1   0   0 
+ *
+ *  Revision 20130602
+ *  -----------------
+ *   COL PB0 PB1 PB2 PB3 PB4 PB5 PB6 PB7
+ *    0   0   0   1   1   1   1   0   0
+ *    1   0   1   1   0   0   1   1   0
+ *    2   0   0   0   1   1   1   0   0
+ *    3   0   1   0   0   1   1   1   0
+ *    4   0   1   1   1   1   0   0   0
+ *    5   0   1   1   1   1   1   0   0
+ *    6   0   1   0   0   0   1   1   0
+ *    7   0   0   0   0   0   1   1   0
+ *    8   0   0   1   0   0   1   1   0
+ *    9   0   0   0   1   0   1   1   0
+ *   10   0   1   0   1   0   1   1   0
+ *   11   0   0   1   1   0   1   1   0
+ *   12   0   1   1   1   0   1   1   0
+ *   13   0   0   0   0   1   1   1   0
+ *   14   0   0   0   1   1   0   1   0
+ *   15   0   1   0   1   1   1   0   0
+ *   16   0   1   0   1   1   0   0   0
+ *   17   0   0   0   1   1   0   0   0
  */
 static void unselect_cols(void)
 {
-#if HW_REVISION = 20140521
+#if HW_REVISION == 20140521
     DDRD  |=  0b01111011;
     PORTD &= ~0b01111011;
+#elif HW_REVISION == 20130602
+    DDRB  |=  0b01111110;
+    PORTB &= ~0b01111110;
 #endif
 }
 
 static void select_col(uint8_t col)
 {
-#if HW_REVISION = 20140521
+#if HW_REVISION == 20140521
     switch (col) {
         case 0:
             PORTD |= (1<<0) | (1<<1) | (1<<5);
@@ -241,6 +284,63 @@ static void select_col(uint8_t col)
             break;
         case 17:
             PORTD |= (1<<0) | (1<<1) | (1<<4) | (1<<5);
+            break;
+    }
+#elif HW_REVISION == 20130602
+    switch (col) {
+        case 0:
+            PORTB |= (1<<2) | (1<<3) | (1<<4) | (1<<5);
+            break;
+        case 1:
+            PORTB |= (1<<1) | (1<<2) | (1<<5) | (1<<6);
+            break;
+        case 2:
+            PORTB |= (1<<3) | (1<<4) | (1<<5);
+            break;
+        case 3:
+            PORTB |= (1<<1) | (1<<4) | (1<<5) | (1<<6);
+            break;
+        case 4:
+            PORTB |= (1<<1) | (1<<2) | (1<<3) | (1<<4);
+            break;
+        case 5:
+            PORTB |= (1<<1) | (1<<2) | (1<<3) | (1<<4) | (1<<5);
+            break;
+        case 6:
+            PORTB |= (1<<1) | (1<<5) | (1<<6);
+            break;
+        case 7:
+            PORTB |= (1<<5) | (1<<6);
+            break;
+        case 8:
+            PORTB |= (1<<2) | (1<<5) | (1<<6);
+            break;
+        case 9:
+            PORTB |= (1<<3) | (1<<5) | (1<<6);
+            break;
+        case 10:
+            PORTB |= (1<<1) | (1<<3) | (1<<5) | (1<<6);
+            break;
+        case 11:
+            PORTB |= (1<<2) | (1<<3) | (1<<5) | (1<<6);
+            break;
+        case 12:
+            PORTB |= (1<<1) | (1<<2) | (1<<3) | (1<<5) | (1<<6);
+            break;
+        case 13:
+            PORTB |= (1<<4) | (1<<5) | (1<<6);
+            break;
+        case 14:
+            PORTB |= (1<<3) | (1<<4) | (1<<6);
+            break;
+        case 15:
+            PORTB |= (1<<1) | (1<<3) | (1<<4) | (1<<5);
+            break;
+        case 16:
+            PORTB |= (1<<1) | (1<<3) | (1<<4);
+            break;
+        case 17:
+            PORTB |= (1<<3) | (1<<4);
             break;
     }
 #endif

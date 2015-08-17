@@ -19,12 +19,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "stdint.h"
 #include "led.h"
 
-/* LED pin configuration
+/* LED pin configuration, both for rev 20140521 and 20130602.
  *
  * Caps         PC5
  * Win/Num      PB7
  * Scroll       PC6
- *
  */
 void led_set(uint8_t usb_led)
 {
