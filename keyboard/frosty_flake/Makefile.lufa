@@ -47,6 +47,10 @@ TMK_DIR = ../../tmk_core
 # Directory keyboard dependent files exist
 TARGET_DIR = .
 
+HW_REVISION ?= 20140521
+
+OPT_DEFS += -DHW_REVISION=$(HW_REVISION)
+
 # List C source files here. (C dependencies are automatically generated.)
 SRC =	keymap.c \
 	matrix.c \

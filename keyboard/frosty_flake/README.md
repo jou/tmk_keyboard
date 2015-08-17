@@ -12,6 +12,9 @@ Move to this directory then just run `make` like:
 
 At the moment only the LUFA stack is supported.
 
+By default, it builds the firmware for hardware revision 20140521. To build for hardware revision 20130602, specify it in the `make` command:
+
+    $ make -f Makefile.lufa HW_REVISION=20130602
 
 Bootloader
 ---------

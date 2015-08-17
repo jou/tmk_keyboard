@@ -122,19 +122,24 @@ uint8_t matrix_key_count(void)
 
 /* Row pin configuration
  *
+ * Revision 20140521
+ * -----------------
  * row: 0    1    2    3    4    5    6    7
  * pin: PC7  PB5  PB4  PB6  PB1  PB0  PB3  PB2
  */
 static void init_rows(void)
 {
+#if HW_REVISION = 20140521
     DDRC &= ~0b10000000;
     DDRB &= ~0b01111111;
     PORTC |= 0b10000000;
     PORTB |= 0b01111111;
+#endif
 }
 
 static uint8_t read_rows(void)
 {
+#if HW_REVISION = 20140521
     return (PINC&(1<<7) ? 0 : (1<<0)) |
            (PINB&(1<<5) ? 0 : (1<<1)) |
            (PINB&(1<<4) ? 0 : (1<<2)) |
@@ -143,9 +148,13 @@ static uint8_t read_rows(void)
            (PINB&(1<<0) ? 0 : (1<<5)) |
            (PINB&(1<<3) ? 0 : (1<<6)) |
            (PINB&(1<<2) ? 0 : (1<<7));
+#endif
 }
 
 /*  These columns uses two 74HC42 4 to 10 bit demultiplexers (low active).
+ *
+ *  Revision 20140521
+ *  -----------------
  *
  *   COL PD0 PD1 PD2 PD3 PD4 PD5 PD6 PD7
  *    0   1   1   0   0   0   1   0   0 
@@ -169,12 +178,15 @@ static uint8_t read_rows(void)
  */
 static void unselect_cols(void)
 {
+#if HW_REVISION = 20140521
     DDRD  |=  0b01111011;
     PORTD &= ~0b01111011;
+#endif
 }
 
 static void select_col(uint8_t col)
 {
+#if HW_REVISION = 20140521
     switch (col) {
         case 0:
             PORTD |= (1<<0) | (1<<1) | (1<<5);
@@ -231,4 +243,5 @@ static void select_col(uint8_t col)
             PORTD |= (1<<0) | (1<<1) | (1<<4) | (1<<5);
             break;
     }
+#endif
 }

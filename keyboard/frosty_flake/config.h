@@ -40,4 +40,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     keyboard_report->mods == (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT)) \
 )
 
+#if (HW_REVISION != 20140521) 
+#error Hardware revision not supported
+#endif
+
 #endif
